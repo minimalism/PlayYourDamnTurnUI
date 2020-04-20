@@ -887,7 +887,7 @@ local m_preSaveMainMenuOptions :table = {	{label = "LOC_PLAY_CIVILIZATION_6",			
 local m_defaultMainMenuOptions :table = {	
 								{label = "LOC_SINGLE_PLAYER",				callback = OnSinglePlayer,		tooltip = "LOC_MAINMENU_SINGLE_PLAYER_TT",			submenu = m_SinglePlayerSubMenu}, 
 								{label = "LOC_PLAY_MULTIPLAYER",			callback = OnMultiPlayer,		tooltip = "LOC_MAINMENU_MULTIPLAYER_TT",			submenu = m_MultiPlayerSubMenu, buttonState = UpdateMultiplayerButton},
-								{label = "LOC_PLAY_YOUR_DAMN_TURN",			callback = OnPlayYourDamnTurn,	tooltip = "LOC_MAINMENU_PLAY_YOUR_DAMN_TURN_TT",	},
+								{label = "Play Your Damn Turn",			callback = OnPlayYourDamnTurn,	tooltip = "Come on man we're all waiting",	},
 								{label = "LOC_MAIN_MENU_OPTIONS",			callback = OnOptions,			tooltip = "LOC_MAINMENU_GAME_OPTIONS_TT"},
 								{label = "LOC_MAIN_MENU_ADDITIONAL_CONTENT",callback = OnAdditionalContent,	tooltip = "LOC_MAIN_MENU_ADDITIONAL_CONTENT_TT",	submenu = m_AdditionalSubMenu},
 								{label = "LOC_MAIN_MENU_TUTORIAL",			callback = OnTutorial,			tooltip = "LOC_MAINMENU_TUTORIAL_TT"},
