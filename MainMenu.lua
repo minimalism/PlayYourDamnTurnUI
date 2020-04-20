@@ -759,11 +759,33 @@ end
 
 function OnPlayYourDamnTurn ( optionIndex:number, submenu:table )
 	LuaEvents.ChangeMPLobbyMode(MPLobbyTypes.HOTSEAT);
-	LuaEvents.MainMenu_RaiseHostGame();
+	
+	function OnFileListCallback( fileList : table, id : number )
+		print("Entered PYDT file list callback...");
+		--LuaEvents.FileListQueryResults.Remove( OnFileListCallback );
 
--- TODO: jump straight into the game: see how 
--- m_thisLoadFile is retrieved from LoadGameMenu.lua:
--- Network.LoadGame(m_thisLoadFile, serverType);
+		local kFoundIndex = -1;
+		for i, v in pairs(fileList) do
+			if(v.Name == "(PYDT) Play This One!.Civ6Save") then
+				kFoundIndex = i;
+				break;
+			end
+		end
+
+		if (kFoundIndex ~= -1) then
+			print("Matching game found! Loading..."); 
+			Network.LoadGame(fileList[kFoundIndex], ServerType.SERVER_TYPE_HOTSEAT);
+		else 
+			print("No matching game found.");
+			LuaEvents.MainMenu_RaiseHostGame();
+		end
+	end
+
+	local gameType = SaveTypes.HOTSEAT;
+	local currentDirectoryPath = UI.GetSaveLocationPath(SaveLocations.LOCAL_STORAGE, gameType, SaveLocationOptions.NO_OPTIONS, false);
+	print ("Querying directory " .. currentDirectoryPath);
+	LuaEvents.FileListQueryResults.Add( OnFileListCallback );
+	UI.QuerySaveGameList( SaveLocations.LOCAL_STORAGE, gameType, SaveLocationOptions.NORMAL, gameType, currentDirectoryPath );
 
 	Close();
 end
